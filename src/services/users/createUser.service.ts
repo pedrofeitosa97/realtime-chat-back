@@ -3,6 +3,7 @@ import { AppDataSource } from '../../data-source'
 import { User } from '../../entities/user.entitie'
 import { UserRequest, UserResponse } from '../../interfaces/users.interfaces'
 import { userSchemaResponse } from '../../schemas/users.schema'
+import { AppError } from '../../errors/AppError'
 
 const createUserService = async (data: UserRequest): Promise<UserResponse> => {
   const { email, name, password } = data
@@ -14,7 +15,7 @@ const createUserService = async (data: UserRequest): Promise<UserResponse> => {
   })
 
   if (findUser) {
-    throw new Error('Usuário já existe.')
+    throw new AppError('Usuário já existe', 409)
   }
 
   const hashedPassword = await hash(password, 10)

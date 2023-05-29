@@ -4,7 +4,7 @@ import { User } from './user.entitie'
 @Entity('chats')
 export class Chat {
   @PrimaryGeneratedColumn()
-  id: number
+  id: string
 
   @Column()
   message: string
@@ -12,6 +12,6 @@ export class Chat {
   @Column()
   timestamp: Date
 
-  @ManyToOne(() => User, (user) => user.chats)
-  user: User
+  @Column()
+  userId: string
 }

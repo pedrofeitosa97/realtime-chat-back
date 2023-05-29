@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import { UserRequest } from '../../interfaces/users.interfaces'
 import { createUserService } from '../../services/users/createUser.service'
 
 const createUserController = async (req: Request, res: Response) => {
