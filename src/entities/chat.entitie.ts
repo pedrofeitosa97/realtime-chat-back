@@ -6,7 +6,7 @@ export class Chat {
   @PrimaryGeneratedColumn()
   id: string
 
-  @Column()
+  @Column({ nullable: true })
   message: string
 
   @Column()
@@ -14,4 +14,7 @@ export class Chat {
 
   @Column()
   userId: string
+
+  @Column()
+  userName: string
 }

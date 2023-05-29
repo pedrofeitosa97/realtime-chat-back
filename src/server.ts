@@ -4,18 +4,27 @@ import app from './app'
 import { AppDataSource } from './data-source'
 
 const server = http.createServer(app)
-const io = new Server(server)
+export const io = new Server(server)
 
 io.on('connection', (socket: Socket) => {
   console.log('Novo usuário conectado')
 
-  socket.on('chat message', (message: string) => {
-    console.log('Mensagem recebida:', message)
-    io.emit('chat message', message)
+  socket.on('set_username', (username: string) => {
+    socket.data.username = username
+    console.log('Novo nome de usuário:', username)
+    io.emit('chat message', username)
   })
 
-  socket.on('disconnect', () => {
-    console.log('Usuário desconectado')
+  socket.on('message', (message: string) => {
+    io.emit('receive_message', {
+      message,
+      userId: socket.id,
+      userName: socket.data.username,
+    })
+  })
+
+  socket.on('disconnect', (reason) => {
+    console.log('Usuário desconectado', socket.id)
   })
 })
 

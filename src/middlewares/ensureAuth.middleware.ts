@@ -27,6 +27,7 @@ const ensureAuthMiddleware = (
         })
       }
       res.locals.userId = decoded.sub
+      res.locals.userName = decoded.userName
       return next()
     }
   )

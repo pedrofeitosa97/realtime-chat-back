@@ -8,7 +8,11 @@ import {
   messageSchemaRequest,
 } from '../../schemas/messages.schema'
 
-const createMessageService = async (data: Message, userId: string) => {
+const createMessageService = async (
+  data: Message,
+  userId: string,
+  userName: string
+) => {
   const messageRepository = AppDataSource.getRepository(Chat)
   const userRepository = AppDataSource.getRepository(User)
 
@@ -22,7 +26,14 @@ const createMessageService = async (data: Message, userId: string) => {
 
   const timestamp = new Date()
 
-  const chatData = { user, timestamp, ...data }
+  console.log(data)
+
+  const chatData = {
+    user,
+    userName,
+    timestamp,
+    ...data,
+  }
 
   const message: any = messageRepository.create(chatData)
 
