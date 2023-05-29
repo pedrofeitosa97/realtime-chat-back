@@ -15,10 +15,16 @@ io.on('connection', (socket: Socket) => {
     io.emit('chat message', username)
   })
 
+  socket.on('set_picture', (photo: string) => {
+    socket.data.photo = photo
+    io.emit('chat message', photo)
+  })
+
   socket.on('message', (message: string) => {
     io.emit('receive_message', {
       message,
       userId: socket.id,
+      photo: socket.data.photo,
       userName: socket.data.username,
     })
   })

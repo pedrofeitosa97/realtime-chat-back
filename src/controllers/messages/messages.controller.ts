@@ -6,7 +6,13 @@ import { io } from '../../server'
 const createMessageController = async (req: Request, res: Response) => {
   const userId = res.locals.userId
   const userName = res.locals.userName
-  const newMessage = await createMessageService(req.body, userId, userName)
+  const userPhoto = res.locals.photo
+  const newMessage = await createMessageService(
+    req.body,
+    userId,
+    userName,
+    userPhoto
+  )
   return res.status(201).json(newMessage)
 }
 const listMessagesController = async (req: Request, res: Response) => {

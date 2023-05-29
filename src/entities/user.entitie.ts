@@ -15,5 +15,5 @@ export class User {
   password: string
 
   @Column()
-  photoURL: string
+  photo: string
 }

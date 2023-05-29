@@ -17,4 +17,7 @@ export class Chat {
 
   @Column()
   userName: string
+
+  @Column()
+  photo: string
 }

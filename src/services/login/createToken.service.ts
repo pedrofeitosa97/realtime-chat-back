@@ -28,9 +28,12 @@ const createTokenService = async ({
     throw new AppError('Credenciais inválidas', 403)
   }
 
+  console.log(user)
+
   const token = jwt.sign(
     {
       userName: user.name,
+      photo: user.photo,
     },
     process.env.SECRET_KEY!,
     {

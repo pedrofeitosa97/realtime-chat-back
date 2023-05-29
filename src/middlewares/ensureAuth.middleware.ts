@@ -26,7 +26,9 @@ const ensureAuthMiddleware = (
           message: 'Token inválido',
         })
       }
+      console.log(decoded)
       res.locals.userId = decoded.sub
+      res.locals.photo = decoded.photo
       res.locals.userName = decoded.userName
       return next()
     }

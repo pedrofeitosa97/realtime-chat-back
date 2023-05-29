@@ -11,7 +11,8 @@ import {
 const createMessageService = async (
   data: Message,
   userId: string,
-  userName: string
+  userName: string,
+  userPhoto: string
 ) => {
   const messageRepository = AppDataSource.getRepository(Chat)
   const userRepository = AppDataSource.getRepository(User)
@@ -26,14 +27,15 @@ const createMessageService = async (
 
   const timestamp = new Date()
 
-  console.log(data)
-
   const chatData = {
     user,
     userName,
+    userPhoto,
     timestamp,
     ...data,
   }
+
+  console.log(chatData)
 
   const message: any = messageRepository.create(chatData)
 
